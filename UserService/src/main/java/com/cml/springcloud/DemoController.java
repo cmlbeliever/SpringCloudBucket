@@ -34,12 +34,12 @@ public class DemoController {
 	@ResponseBody
 	@RequestMapping("/hello")
 	public String sayHello(String req) {
-		return "req:" + req + ",from : port:" + port + ",serverName:" + sererName;
+		return "server:" + req + ",from : port:" + port + ",serverName:" + sererName;
 	}
 
-	@RequestMapping("/order")
+	@RequestMapping("/userInfo")
 	@ResponseBody
 	public String getOrder(String user) {
-		return "Get user[ " + user + "] order from port:" + port + ",serverName:" + sererName;
+		return "Get userInfo[ " + user + "]  from port:" + port + ",serverName:" + sererName;
 	}
 }
