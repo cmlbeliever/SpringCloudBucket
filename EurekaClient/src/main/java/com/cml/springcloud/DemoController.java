@@ -7,17 +7,29 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.cml.springcloud.api.UserApi;
+
 @Controller
 @RequestMapping("/")
 public class DemoController {
 
-	@Value("${spring.application.name}")
-	private String port;
 	@Value("${server.port}")
+	private String port;
+
+	@Value("${spring.application.name}")
 	private String sererName;
 
 	@Autowired
 	private DiscoveryClient client;
+
+	@Autowired
+	private UserApi userApi;
+
+	@ResponseBody
+	@RequestMapping("/test")
+	public String test(String user) {
+		return "port:" + port + ",serverName:" + sererName + ",getUser info ==>" + userApi.getUser(user);
+	}
 
 	@ResponseBody
 	@RequestMapping("/info")

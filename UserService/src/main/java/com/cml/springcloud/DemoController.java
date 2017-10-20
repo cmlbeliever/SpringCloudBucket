@@ -7,6 +7,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.cml.springcloud.api.OrderApi;
+
 @Controller
 @RequestMapping("/")
 public class DemoController {
@@ -19,15 +21,12 @@ public class DemoController {
 	@Autowired
 	private DiscoveryClient client;
 
+	@Autowired
+	private OrderApi orderApi;
+
 	@ResponseBody
 	@RequestMapping("/info")
 	public Object info() {
-		return client.getServices();
-	}
-
-	@ResponseBody
-	@RequestMapping("/info2")
-	public Object info2() {
 		return client.getServices();
 	}
 
@@ -37,9 +36,15 @@ public class DemoController {
 		return "server:" + req + ",from : port:" + port + ",serverName:" + sererName;
 	}
 
-	@RequestMapping("/userInfo")
 	@ResponseBody
-	public String getOrder(String user) {
-		return "Get userInfo[ " + user + "]  from port:" + port + ",serverName:" + sererName;
+	@RequestMapping("/getUser")
+	public String getUser(String user) {
+		return "get userInfo user:[" + user + "],from : port:" + port + ",serverName:" + sererName;
+	}
+
+	@RequestMapping("/test")
+	@ResponseBody
+	public String test(String user) {
+		return "Get userInfo[ " + user + "]  from port:" + port + ",serverName:" + sererName + "\n has order:" + orderApi.getOrder("u" + user);
 	}
 }
