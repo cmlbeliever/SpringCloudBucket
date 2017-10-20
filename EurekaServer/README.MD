@@ -4,3 +4,6 @@
 http://192.168.1.183:8762/test?user=333
 # 获取用户信息
 http://192.168.1.183:8763/test?user=test
+
+# 查看配置中心是否成功
+http://localhost:8761/${文件名}.properties
