@@ -34,8 +34,6 @@ import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.client.RestTemplate;
 
-@Component
-@Order(-1)
 public class ConfigServicePropertyExtensionSourceLocator extends ConfigServicePropertySourceLocator {
 
 	private static Log logger = LogFactory
