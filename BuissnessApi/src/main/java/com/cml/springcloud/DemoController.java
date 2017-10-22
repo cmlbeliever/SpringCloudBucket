@@ -5,12 +5,15 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.cml.springcloud.api.OrderApi;
 import com.cml.springcloud.api.UserApi;
+import com.cml.springcloud.model.ZuulModel;
 
 @Controller
-@RequestMapping("/")
+@RequestMapping("/biz")
 public class DemoController {
 
 	@Value("${server.port}")
@@ -24,12 +27,8 @@ public class DemoController {
 
 	@Autowired
 	private UserApi userApi;
-
-	@ResponseBody
-	@RequestMapping("/test")
-	public String test(String user) {
-		return "port:" + port + ",serverName:" + sererName + ",getUser info ==>" + userApi.getUser(user);
-	}
+	@Autowired
+	private OrderApi orderApi;
 
 	@ResponseBody
 	@RequestMapping("/info")
@@ -37,21 +36,26 @@ public class DemoController {
 		return client.getServices();
 	}
 
-	@ResponseBody
-	@RequestMapping("/info2")
-	public Object info2() {
-		return client.getServices();
+	@RequestMapping("/zuul")
+	@ResponseBody()
+	public ZuulModel testFeign(@RequestParam(defaultValue = "defaultUser", required = false) String user)
+			throws Exception {
+		ZuulModel model = new ZuulModel();
+		model.setUserInfo(userApi.getUser(user));
+		model.setUserInfo(orderApi.getOrder(user));
+		model.setSystemMsg("port:" + port + ",serverName:" + sererName);
+		return model;
 	}
-
-	@ResponseBody
-	@RequestMapping("/hello")
-	public String sayHello(String req) {
-		return "req:" + req + ",from : port:" + port + ",serverName:" + sererName;
-	}
-
-	@RequestMapping("/order")
-	@ResponseBody
-	public String getOrder(String user) {
-		return "Get user[ " + user + "] order from port:" + port + ",serverName:" + sererName;
-	}
+	// @RequestMapping("/zuul")
+	// @ResponseBody()
+	// public JSONObject testFeign(@RequestParam(defaultValue = "defaultUser",
+	// required = false) String user)
+	// throws Exception {
+	// JSONObject result = new JSONObject();
+	// result.put("userInfo", userApi.getUser(user));
+	// result.put("orderInfo", orderApi.getOrder(user));
+	// result.put("zuulServerInfo", "port:" + port + ",serverName:" +
+	// sererName);
+	// return result;
+	// }
 }

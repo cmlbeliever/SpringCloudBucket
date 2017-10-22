@@ -31,12 +31,6 @@ public class DemoController {
 	}
 
 	@ResponseBody
-	@RequestMapping("/hello")
-	public String sayHello(String req) {
-		return "server:" + req + ",from : port:" + port + ",serverName:" + sererName;
-	}
-
-	@ResponseBody
 	@RequestMapping("/getUser")
 	public String getUser(String user) {
 		return "get userInfo user:[" + user + "],from : port:" + port + ",serverName:" + sererName;
@@ -45,6 +39,7 @@ public class DemoController {
 	@RequestMapping("/test")
 	@ResponseBody
 	public String test(String user) {
-		return "Get userInfo[ " + user + "]  from port:" + port + ",serverName:" + sererName + "\n has order:" + orderApi.getOrder("u" + user);
+		return "Get userInfo[ " + user + "]  from port:" + port + ",serverName:" + sererName + "\n has order:"
+				+ orderApi.getOrder("u" + user);
 	}
 }
