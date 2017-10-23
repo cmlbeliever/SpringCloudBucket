@@ -9,5 +9,5 @@ package com.cml.springcloud.api.filter;
 public interface FilterOrders {
 	int ORDER_LOWEST = 200;
 	int ORDER_MEDIUM = 100;
-	int ORDER_HIGHLY = 100;
+	int ORDER_HIGHLY = 10;
 }
