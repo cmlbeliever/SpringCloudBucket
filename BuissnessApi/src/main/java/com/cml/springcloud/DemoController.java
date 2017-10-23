@@ -38,11 +38,10 @@ public class DemoController {
 
 	@RequestMapping("/zuul")
 	@ResponseBody()
-	public ZuulModel testFeign(@RequestParam(defaultValue = "defaultUser", required = false) String user)
-			throws Exception {
+	public ZuulModel testFeign(@RequestParam(defaultValue = "defaultUser", required = false) String user) throws Exception {
 		ZuulModel model = new ZuulModel();
 		model.setUserInfo(userApi.getUser(user));
-		model.setUserInfo(orderApi.getOrder(user));
+		model.setOrderInfo(orderApi.getOrder(user));
 		model.setSystemMsg("port:" + port + ",serverName:" + sererName);
 		return model;
 	}
