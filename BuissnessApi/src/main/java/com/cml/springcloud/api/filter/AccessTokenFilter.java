@@ -13,21 +13,25 @@ public class AccessTokenFilter extends AbstractZuulFilter {
 
 	@Override
 	public Object run() {
+		logger.info("AccessTokenFilter==>run");
 		return null;
 	}
 
 	@Override
 	public boolean shouldFilter() {
+		logger.info("AccessTokenFilter==>shouldFilter");
 		return true;
 	}
 
 	@Override
 	public int filterOrder() {
+		logger.info("AccessTokenFilter==>filterOrder");
 		return FilterOrders.ORDER_HIGHLY;
 	}
 
 	@Override
 	public String filterType() {
+		logger.info("AccessTokenFilter==>filterType");
 		return "pre";
 	}
 

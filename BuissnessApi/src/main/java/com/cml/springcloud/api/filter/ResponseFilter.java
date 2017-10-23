@@ -13,23 +13,25 @@ public class ResponseFilter extends AbstractZuulFilter {
 
 	@Override
 	public boolean shouldFilter() {
-		// TODO Auto-generated method stub
+		logger.info("ResponseFilter==>shouldFilter");
 		return false;
 	}
 
 	@Override
 	public Object run() {
-		// TODO Auto-generated method stub
+		logger.info("ResponseFilter==>run");
 		return null;
 	}
 
 	@Override
 	public String filterType() {
+		logger.info("ResponseFilter==>filterType");
 		return "post";
 	}
 
 	@Override
 	public int filterOrder() {
+		logger.info("ResponseFilter==>filterOrder");
 		return FilterOrders.ORDER_LOWEST;
 	}
 

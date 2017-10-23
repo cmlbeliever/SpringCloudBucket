@@ -7,23 +7,25 @@ public class ErrorFilter extends AbstractZuulFilter {
 
 	@Override
 	public boolean shouldFilter() {
-		// TODO Auto-generated method stub
+		logger.info("ErrorFilter==>shouldFilter");
 		return false;
 	}
 
 	@Override
 	public Object run() {
-		// TODO Auto-generated method stub
+		logger.info("ErrorFilter==>run");
 		return null;
 	}
 
 	@Override
 	public String filterType() {
+		logger.info("ErrorFilter==>filterType");
 		return "error";
 	}
 
 	@Override
 	public int filterOrder() {
+		logger.info("ErrorFilter==>filterOrder");
 		return FilterOrders.ORDER_HIGHLY;
 	}
 
