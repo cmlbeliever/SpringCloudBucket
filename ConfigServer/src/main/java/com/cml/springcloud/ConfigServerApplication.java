@@ -6,8 +6,8 @@ import org.springframework.cloud.config.server.EnableConfigServer;
 
 @EnableConfigServer
 @SpringBootApplication
-public class EurakeServerApplication {
+public class ConfigServerApplication {
 	public static void main(String[] args) {
-		new SpringApplicationBuilder(EurakeServerApplication.class).web(true).run(args);
+		new SpringApplicationBuilder(ConfigServerApplication.class).web(true).run(args);
 	}
 }

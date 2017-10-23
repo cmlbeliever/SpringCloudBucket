@@ -14,6 +14,7 @@ public class ErrorFilter extends AbstractZuulFilter {
 	@Override
 	public Object run() {
 		logger.info("ErrorFilter==>run");
+		System.out.println("ErrorFilter=sys=>run");
 		return null;
 	}
 

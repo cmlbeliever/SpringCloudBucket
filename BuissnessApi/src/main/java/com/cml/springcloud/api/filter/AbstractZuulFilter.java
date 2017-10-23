@@ -10,5 +10,6 @@ public abstract class AbstractZuulFilter extends ZuulFilter {
 
 	public AbstractZuulFilter() {
 		System.out.println("========================实例化AbstractZuulFilter==============================");
+		logger.info("=====================logger===实例化AbstractZuulFilter==============================");
 	}
 }

@@ -14,6 +14,7 @@ public class AccessTokenFilter extends AbstractZuulFilter {
 	@Override
 	public Object run() {
 		logger.info("AccessTokenFilter==>run");
+		System.out.println("AccessTokenFilter=sys=>run");
 		return null;
 	}
 

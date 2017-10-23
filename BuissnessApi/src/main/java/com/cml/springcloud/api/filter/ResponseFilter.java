@@ -20,6 +20,7 @@ public class ResponseFilter extends AbstractZuulFilter {
 	@Override
 	public Object run() {
 		logger.info("ResponseFilter==>run");
+		System.out.println("ResponseFilter=sys=>run");
 		return null;
 	}
 
