@@ -12,7 +12,6 @@ import org.springframework.util.StreamUtils;
 
 import com.netflix.zuul.context.RequestContext;
 
-@Component
 public class ErrorFilter extends AbstractZuulFilter {
 
 	@Override

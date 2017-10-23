@@ -18,7 +18,6 @@ import com.netflix.zuul.context.RequestContext;
  * @author cml
  *
  */
-@Component
 public class ResponseFilter extends AbstractZuulFilter {
 
 	@Override

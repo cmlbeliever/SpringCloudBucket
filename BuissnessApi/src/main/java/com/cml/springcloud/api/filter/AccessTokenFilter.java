@@ -26,7 +26,6 @@ import com.netflix.zuul.http.ServletInputStreamWrapper;
  * @author cml
  *
  */
-@Component
 public class AccessTokenFilter extends AbstractZuulFilter {
 
 	@Override
@@ -46,21 +45,6 @@ public class AccessTokenFilter extends AbstractZuulFilter {
 			String reqBody = body + "-appendUserSuffix";
 			final byte[] reqBodyBytes = reqBody.getBytes();
 			logger.info("accessToken:" + reqBody);
-
-			if (StringUtils.equalsIgnoreCase(context.getRequest().getMethod(), "get")) {
-				// context.set("requestEntity", new
-				// ByteArrayInputStream(reqBodyBytes));
-				try {
-					logger.info("ori url:" + context.getRouteHost().toURI());
-					URL url = UriComponentsBuilder.fromUri(context.getRouteHost().toURI()).queryParam("user", "modifydUser").build().toUri().toURL();
-					logger.info("url:" + url);
-					context.setRouteHost(url);
-				} catch (URISyntaxException e) {
-					e.printStackTrace();
-				}
-
-				return null;
-			}
 
 			// context.set("requestEntity", new
 			// ByteArrayInputStream(body.getBytes("UTF-8")));
@@ -89,7 +73,7 @@ public class AccessTokenFilter extends AbstractZuulFilter {
 	@Override
 	public boolean shouldFilter() {
 		logger.info("AccessTokenFilter==>shouldFilter");
-		return true;
+		return StringUtils.equalsIgnoreCase(RequestContext.getCurrentContext().getRequest().getMethod(), "post");
 	}
 
 	@Override
