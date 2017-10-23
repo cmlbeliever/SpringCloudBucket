@@ -1,5 +1,8 @@
 package com.cml.springcloud.api.filter;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class ErrorFilter extends AbstractZuulFilter {
 
 	@Override

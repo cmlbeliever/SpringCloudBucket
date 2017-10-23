@@ -1,11 +1,14 @@
 package com.cml.springcloud.api.filter;
 
+import org.springframework.stereotype.Component;
+
 /**
  * 登录拦截器,未登录的用户直接返回未登录数据
  * 
  * @author cml
  *
  */
+@Component
 public class AccessTokenFilter extends AbstractZuulFilter {
 
 	@Override
