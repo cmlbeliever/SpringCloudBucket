@@ -19,7 +19,7 @@ public class ErrorFilter extends AbstractZuulFilter {
 
 	public static final String KEY_ERROR = "hasError";
 
-	private ErrorHandler errorHandler;
+	private ResponseHandler errorHandler;
 
 	@Override
 	public boolean shouldFilter() {
@@ -35,7 +35,7 @@ public class ErrorFilter extends AbstractZuulFilter {
 
 			if (null != errorHandler) {
 				context.setResponseStatusCode(errorHandler.getResponseCode());
-				String body = errorHandler.getResponseBody(context.getThrowable());
+				String body = errorHandler.getResponseBody(null, context.getThrowable());
 				context.setResponseBody(body);
 				// context.setResponseDataStream(new
 				// ByteArrayInputStream(errorHandler.getResponseBody(context.getThrowable()).getBytes("UTF-8")));
@@ -61,11 +61,11 @@ public class ErrorFilter extends AbstractZuulFilter {
 		return FilterConstants.SEND_ERROR_FILTER_ORDER - 1;
 	}
 
-	public ErrorHandler getErrorHandler() {
+	public ResponseHandler getErrorHandler() {
 		return errorHandler;
 	}
 
-	public void setErrorHandler(ErrorHandler errorHandler) {
+	public void setErrorHandler(ResponseHandler errorHandler) {
 		this.errorHandler = errorHandler;
 	}
 

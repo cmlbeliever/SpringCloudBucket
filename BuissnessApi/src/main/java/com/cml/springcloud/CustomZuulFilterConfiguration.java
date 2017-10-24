@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 
 import com.cml.springcloud.api.filter.AccessTokenFilter;
 import com.cml.springcloud.api.filter.ErrorFilter;
-import com.cml.springcloud.api.filter.ErrorHandler;
+import com.cml.springcloud.api.filter.ResponseHandler;
 import com.cml.springcloud.api.filter.GetRequestAccessTokenFilter;
 import com.cml.springcloud.api.filter.ResponseFilter;
 import com.google.gson.Gson;
@@ -49,7 +49,7 @@ public class CustomZuulFilterConfiguration {
 	 *
 	 */
 	@Component
-	public class CustomErrorHandler implements ErrorHandler {
+	public class CustomErrorHandler implements ResponseHandler {
 
 		@Value("${system.config.error.message}")
 		private String errorMessage;
@@ -60,12 +60,12 @@ public class CustomZuulFilterConfiguration {
 		}
 
 		@Override
-		public String getResponseBody(Throwable e) {
+		public String getResponseBody(String originMessage, Throwable e) {
 			Gson gson = new Gson();
 			Map<String, Object> result = new HashMap<String, Object>();
 			result.put("status", HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
 			result.put("message", errorMessage);
-			System.out.println("====>"+errorMessage);
+			System.out.println("====>" + errorMessage);
 			return gson.toJson(result);
 		}
 	}

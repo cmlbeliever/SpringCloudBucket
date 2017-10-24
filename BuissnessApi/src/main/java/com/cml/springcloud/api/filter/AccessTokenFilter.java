@@ -17,7 +17,10 @@ import com.netflix.zuul.context.RequestContext;
 import com.netflix.zuul.http.ServletInputStreamWrapper;
 
 /**
- * 登录拦截器,未登录的用户直接返回未登录数据
+ * 登录拦截器,未登录的用户直接返回未登录数据。
+ * <p>
+ * 只拦截post方式的请求
+ * </p>
  * 
  * @author cml
  *
@@ -26,11 +29,8 @@ public class AccessTokenFilter extends AbstractZuulFilter {
 
 	@Override
 	public Object run() {
-		logger.info("AccessTokenFilter==>run");
 		try {
 			RequestContext context = getCurrentContext();
-			logger.info("====requestMethod:" + context.getRequest().getMethod());
-			logger.info("====header:" + context.getRequest().getHeaderNames());
 
 			InputStream in = (InputStream) context.get("requestEntity");
 			if (in == null) {
@@ -68,7 +68,6 @@ public class AccessTokenFilter extends AbstractZuulFilter {
 
 	@Override
 	public boolean shouldFilter() {
-		logger.info("AccessTokenFilter==>shouldFilter");
 		return StringUtils.equalsIgnoreCase(RequestContext.getCurrentContext().getRequest().getMethod(), "post");
 	}
 

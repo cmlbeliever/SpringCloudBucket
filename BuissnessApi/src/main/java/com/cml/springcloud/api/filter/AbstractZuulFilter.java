@@ -7,7 +7,4 @@ import com.netflix.zuul.ZuulFilter;
 
 public abstract class AbstractZuulFilter extends ZuulFilter {
 	protected static Logger logger = LoggerFactory.getLogger(AbstractZuulFilter.class);
-
-	public AbstractZuulFilter() {
-	}
 }

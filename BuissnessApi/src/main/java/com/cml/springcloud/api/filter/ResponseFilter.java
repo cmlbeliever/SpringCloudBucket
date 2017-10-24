@@ -3,7 +3,6 @@ package com.cml.springcloud.api.filter;
 import static com.netflix.zuul.context.RequestContext.getCurrentContext;
 import static org.springframework.util.ReflectionUtils.rethrowRuntimeException;
 
-import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.Charset;
@@ -23,7 +22,9 @@ public class ResponseFilter extends AbstractZuulFilter {
 
 	@Override
 	public boolean shouldFilter() {
-		return true;
+		RequestContext context = getCurrentContext();
+		// 有错误的返回不处理，其他请求都处理
+		return null == context.get(ErrorFilter.KEY_ERROR);
 	}
 
 	@Override
@@ -31,17 +32,11 @@ public class ResponseFilter extends AbstractZuulFilter {
 
 		try {
 			RequestContext context = getCurrentContext();
-			logger.info("ResponseFilter==>run" + ",ex:" + context.getThrowable());
-
-			if (null != context.get(ErrorFilter.KEY_ERROR)) {
-				return null;
-			}
 
 			InputStream stream = context.getResponseDataStream();
 			String body = StreamUtils.copyToString(stream, Charset.forName("UTF-8"));
 			context.setResponseBody("Modified via setResponseBody(): " + body);
 			context.setResponseStatusCode(200);
-			// SendResponseFilter
 		} catch (IOException e) {
 			logger.error("response", e);
 			rethrowRuntimeException(e);
