@@ -3,9 +3,12 @@ package com.cml.springcloud.api.filter;
 import static com.netflix.zuul.context.RequestContext.getCurrentContext;
 import static org.springframework.util.ReflectionUtils.rethrowRuntimeException;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.cloud.netflix.zuul.filters.support.FilterConstants;
 
 import com.netflix.zuul.context.RequestContext;
+import com.netflix.zuul.exception.ZuulException;
 
 public class ErrorFilter extends AbstractZuulFilter {
 
@@ -24,10 +27,17 @@ public class ErrorFilter extends AbstractZuulFilter {
 			// InputStream stream = context.getResponseDataStream();
 			// String body = StreamUtils.copyToString(stream,
 			// Charset.forName("UTF-8"));
-			context.setSendZuulResponse(false);
-			context.setResponseStatusCode(200);
-			context.setResponseBody("some error occured!");
-		
+			// context.setSendZuulResponse(false);
+			// context.setResponseStatusCode(200);
+			// context.setResponseBody("some error occured!");
+
+			// context.put("error.status_code", 200);
+			// context.put("error.error", "custom error");
+			// context.put("error.message", "custom message");
+			// context.put("error.exception", new
+			// IllegalStateException("xxxx"));
+			context.setThrowable(new ZuulException("error message", HttpServletResponse.SC_OK, "error cause!!!"));
+
 			// SendErrorFilter
 		} catch (Exception e) {
 			rethrowRuntimeException(e);
