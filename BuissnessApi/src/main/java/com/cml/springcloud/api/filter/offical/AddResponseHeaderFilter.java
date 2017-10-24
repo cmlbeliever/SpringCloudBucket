@@ -12,7 +12,6 @@ import com.netflix.zuul.context.RequestContext;
 /**
  * @author Spencer Gibb
  */
-@Component
 public class AddResponseHeaderFilter extends ZuulFilter {
 	public String filterType() {
 		return "post";

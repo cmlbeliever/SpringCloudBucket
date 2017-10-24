@@ -16,7 +16,6 @@ import static org.springframework.util.ReflectionUtils.rethrowRuntimeException;
 /**
  * @author Spencer Gibb
  */
-@Component
 public class ModifyResponseBodyFilter extends ZuulFilter {
 	public String filterType() {
 		return "post";

@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.Charset;
 
+import org.springframework.cloud.netflix.zuul.filters.support.FilterConstants;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StreamUtils;
 
@@ -28,13 +29,17 @@ public class ResponseFilter extends AbstractZuulFilter {
 
 	@Override
 	public Object run() {
-		logger.info("ResponseFilter==>run");
+
 		try {
 			RequestContext context = getCurrentContext();
+			logger.info("ResponseFilter==>run" + ",ex:" + context.getThrowable());
 			InputStream stream = context.getResponseDataStream();
 			String body = StreamUtils.copyToString(stream, Charset.forName("UTF-8"));
 			context.setResponseBody("Modified via setResponseBody(): " + body);
+			context.setResponseStatusCode(200);
+			//SendResponseFilter
 		} catch (IOException e) {
+			logger.error("response", e);
 			rethrowRuntimeException(e);
 		}
 		return null;
@@ -49,7 +54,7 @@ public class ResponseFilter extends AbstractZuulFilter {
 	@Override
 	public int filterOrder() {
 		logger.info("ResponseFilter==>filterOrder");
-		return FilterOrders.ORDER_LOWEST;
+		return Integer.MAX_VALUE;
 	}
 
 }

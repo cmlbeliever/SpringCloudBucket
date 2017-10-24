@@ -12,7 +12,6 @@ import static com.netflix.zuul.context.RequestContext.getCurrentContext;
 /**
  * @author Spencer Gibb
  */
-@Component
 public class QueryParamServiceIdPreFilter extends ZuulFilter {
 
 	public int filterOrder() {

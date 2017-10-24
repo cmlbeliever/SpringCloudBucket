@@ -25,26 +25,21 @@ public class GetRequestAccessTokenFilter extends AbstractZuulFilter {
 	@Override
 	public Object run() {
 		logger.info("GetRequestAccessTokenFilter==>run");
-		try {
-			RequestContext context = getCurrentContext();
-			logger.info("====requestMethod:" + context.getRequest().getMethod());
-			logger.info("====header:" + context.getRequest().getHeaderNames());
+		RequestContext context = getCurrentContext();
+		logger.info("====requestMethod:" + context.getRequest().getMethod());
+		logger.info("====header:" + context.getRequest().getHeaderNames());
 
-			// context.set("requestEntity", new
-			// ByteArrayInputStream(reqBodyBytes));
-			try {
-				logger.info("ori url:" + context.getRouteHost());
-				URL url = UriComponentsBuilder.fromUri(context.getRouteHost().toURI()).queryParam("user", "modifydUser")
-						.build().toUri().toURL();
-				logger.info("url:" + url);
-				context.setRouteHost(url);
-			} catch (URISyntaxException e) {
-				e.printStackTrace();
-			}
+		String url = (String) context.get(FilterConstants.REQUEST_URI_KEY);
 
-		} catch (IOException e) {
-			rethrowRuntimeException(e);
+		logger.info("ori url:" + url + ",serviceId:" + context.get("serviceId"));
+
+		if (true) {
+			rethrowRuntimeException(new RuntimeException("主动跑错"));
 		}
+		// URL url =
+		// UriComponentsBuilder.fromUriString(context.getRequest().getRequestURL().toString()).queryParam("user",
+		// "modifydUser").build()
+		// context.set(FilterConstants.REQUEST_URI_KEY, url + "?user=test");
 		return null;
 	}
 
@@ -57,13 +52,13 @@ public class GetRequestAccessTokenFilter extends AbstractZuulFilter {
 	@Override
 	public int filterOrder() {
 		logger.info("GetRequestAccessTokenFilter==>filterOrder");
-		return FilterConstants.PRE_DECORATION_FILTER_ORDER + 1;
+		return FilterConstants.RIBBON_ROUTING_FILTER_ORDER - 1;
 	}
 
 	@Override
 	public String filterType() {
 		logger.info("AccessTokenFilter==>filterType");
-		return FilterConstants.PRE_TYPE;
+		return FilterConstants.ROUTE_TYPE;
 	}
 
 }
