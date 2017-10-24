@@ -11,10 +11,10 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
 
 import com.cml.springcloud.api.filter.AccessTokenFilter;
+import com.cml.springcloud.api.filter.AuthResponseFilter;
 import com.cml.springcloud.api.filter.ErrorFilter;
-import com.cml.springcloud.api.filter.ResponseHandler;
 import com.cml.springcloud.api.filter.GetRequestAccessTokenFilter;
-import com.cml.springcloud.api.filter.ResponseFilter;
+import com.cml.springcloud.api.filter.ResponseHandler;
 import com.google.gson.Gson;
 
 @Configuration
@@ -38,8 +38,8 @@ public class CustomZuulFilterConfiguration {
 	}
 
 	@Bean
-	public ResponseFilter responseFilter() {
-		return new ResponseFilter();
+	public AuthResponseFilter responseFilter() {
+		return new AuthResponseFilter();
 	}
 
 	/**
