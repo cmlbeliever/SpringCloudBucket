@@ -3,12 +3,12 @@ package com.cml.springcloud.api.filter;
 import static com.netflix.zuul.context.RequestContext.getCurrentContext;
 import static org.springframework.util.ReflectionUtils.rethrowRuntimeException;
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.Charset;
 
 import org.springframework.cloud.netflix.zuul.filters.support.FilterConstants;
-import org.springframework.stereotype.Component;
 import org.springframework.util.StreamUtils;
 
 import com.netflix.zuul.context.RequestContext;
@@ -34,10 +34,12 @@ public class ResponseFilter extends AbstractZuulFilter {
 			RequestContext context = getCurrentContext();
 			logger.info("ResponseFilter==>run" + ",ex:" + context.getThrowable());
 
-			if (null != context.getThrowable()) {
-				context.setResponseBody("Modified via setResponseBody(): error o llllll");
-				context.setResponseStatusCode(200);
-				context.setSendZuulResponse(false);
+			if (null != context.get("isError")) {
+				// context.setResponseBody("Modified via setResponseBody()error
+				// o llllll");
+				// context.setResponseDataStream(new
+				// ByteArrayInputStream("erroroccured!!".getBytes("UTF-8")));
+				// context.setResponseStatusCode(200);
 				logger.info("ResponseFilter==> end !!!!");
 				return null;
 			}
@@ -63,7 +65,7 @@ public class ResponseFilter extends AbstractZuulFilter {
 	@Override
 	public int filterOrder() {
 		logger.info("ResponseFilter==>filterOrder");
-		return Integer.MAX_VALUE;
+		return FilterConstants.SEND_RESPONSE_FILTER_ORDER - 1;
 	}
 
 }
