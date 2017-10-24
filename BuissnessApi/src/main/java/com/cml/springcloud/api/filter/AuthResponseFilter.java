@@ -8,13 +8,16 @@ import java.io.InputStream;
 import java.nio.charset.Charset;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.netflix.zuul.filters.support.FilterConstants;
 import org.springframework.util.StreamUtils;
 
-import com.cml.springcloud.auth.AccessTokenAuthManager;
+import com.cml.springcloud.api.AuthApi;
+import com.cml.springcloud.model.AuthModel;
 import com.google.gson.Gson;
 import com.netflix.zuul.context.RequestContext;
 
@@ -33,7 +36,7 @@ public class AuthResponseFilter extends AbstractZuulFilter {
 	private String tokenKey = RESPONSE_KEY_TOKEN;
 
 	@Autowired
-	private AccessTokenAuthManager authManager;
+	private AuthApi authApi;
 
 	@Override
 	public boolean shouldFilter() {
@@ -55,7 +58,11 @@ public class AuthResponseFilter extends AbstractZuulFilter {
 				@SuppressWarnings("unchecked")
 				Map<String, String> result = gson.fromJson(body, Map.class);
 				if (StringUtils.isNotBlank(result.get(tokenKey))) {
-					String accessToken = authManager.generateToken(result.get(tokenKey));
+					AuthModel authResult = authApi.encodeToken(result.get(tokenKey));
+					if (authResult.getStatus() != HttpServletResponse.SC_OK) {
+						throw new IllegalArgumentException(authResult.getErrMsg());
+					}
+					String accessToken = authResult.getToken();
 					result.put(tokenKey, accessToken);
 				}
 				body = gson.toJson(result);
