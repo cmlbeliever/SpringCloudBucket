@@ -5,17 +5,13 @@ import static org.springframework.util.ReflectionUtils.rethrowRuntimeException;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.URISyntaxException;
-import java.net.URL;
 import java.nio.charset.Charset;
 
 import javax.servlet.ServletInputStream;
 import javax.servlet.http.HttpServletRequestWrapper;
 
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.stereotype.Component;
 import org.springframework.util.StreamUtils;
-import org.springframework.web.util.UriComponentsBuilder;
 
 import com.netflix.zuul.context.RequestContext;
 import com.netflix.zuul.http.ServletInputStreamWrapper;
@@ -78,13 +74,11 @@ public class AccessTokenFilter extends AbstractZuulFilter {
 
 	@Override
 	public int filterOrder() {
-		logger.info("AccessTokenFilter==>filterOrder");
-		return FilterOrders.ORDER_HIGHLY;
+		return 0;
 	}
 
 	@Override
 	public String filterType() {
-		logger.info("AccessTokenFilter==>filterType");
 		return "pre";
 	}
 

@@ -23,7 +23,6 @@ public class ResponseFilter extends AbstractZuulFilter {
 
 	@Override
 	public boolean shouldFilter() {
-		logger.info("ResponseFilter==>shouldFilter");
 		return true;
 	}
 
@@ -34,13 +33,7 @@ public class ResponseFilter extends AbstractZuulFilter {
 			RequestContext context = getCurrentContext();
 			logger.info("ResponseFilter==>run" + ",ex:" + context.getThrowable());
 
-			if (null != context.get("isError")) {
-				// context.setResponseBody("Modified via setResponseBody()error
-				// o llllll");
-				// context.setResponseDataStream(new
-				// ByteArrayInputStream("erroroccured!!".getBytes("UTF-8")));
-				// context.setResponseStatusCode(200);
-				logger.info("ResponseFilter==> end !!!!");
+			if (null != context.get(ErrorFilter.KEY_ERROR)) {
 				return null;
 			}
 
