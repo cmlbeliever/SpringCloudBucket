@@ -33,11 +33,20 @@ public class ResponseFilter extends AbstractZuulFilter {
 		try {
 			RequestContext context = getCurrentContext();
 			logger.info("ResponseFilter==>run" + ",ex:" + context.getThrowable());
+
+			if (null != context.getThrowable()) {
+				context.setResponseBody("Modified via setResponseBody(): error o llllll");
+				context.setResponseStatusCode(200);
+				context.setSendZuulResponse(false);
+				logger.info("ResponseFilter==> end !!!!");
+				return null;
+			}
+
 			InputStream stream = context.getResponseDataStream();
 			String body = StreamUtils.copyToString(stream, Charset.forName("UTF-8"));
 			context.setResponseBody("Modified via setResponseBody(): " + body);
 			context.setResponseStatusCode(200);
-			//SendResponseFilter
+			// SendResponseFilter
 		} catch (IOException e) {
 			logger.error("response", e);
 			rethrowRuntimeException(e);

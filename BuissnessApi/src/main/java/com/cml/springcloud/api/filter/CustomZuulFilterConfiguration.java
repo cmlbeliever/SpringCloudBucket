@@ -11,10 +11,10 @@ public class CustomZuulFilterConfiguration {
 		return new AccessTokenFilter();
 	}
 
-	@Bean
-	public ErrorFilter errorFilter() {
-		return new ErrorFilter();
-	}
+//	@Bean
+//	public ErrorFilter errorFilter() {
+//		return new ErrorFilter();
+//	}
 
 	@Bean
 	public GetRequestAccessTokenFilter getRequestAccessTokenFilter() {

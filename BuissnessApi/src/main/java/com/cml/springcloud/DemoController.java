@@ -36,6 +36,12 @@ public class DemoController {
 		return client.getServices();
 	}
 
+	@ResponseBody
+	@RequestMapping("/errorController")
+	public String error() {
+		return "error";
+	}
+
 	@RequestMapping("/zuul")
 	@ResponseBody()
 	public ZuulModel testFeign(@RequestParam(defaultValue = "defaultUser", required = false) String user) throws Exception {
