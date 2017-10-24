@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.cml.springcloud.model.AuthModel;
 
-@FeignClient("AUTH-CENTER")
+@FeignClient("AUTH-SERVICE")
 public interface AuthApi {
 
 	@RequestMapping(value = "/auth/encodeToken")

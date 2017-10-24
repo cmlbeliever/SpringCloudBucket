@@ -4,7 +4,7 @@ import org.springframework.cloud.netflix.feign.FeignClient;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-@FeignClient("EUREKA-ORDER")
+@FeignClient("ORDER-SERVICE")
 public interface OrderApi {
 
 	@RequestMapping(value = "/order")
