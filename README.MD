@@ -12,6 +12,11 @@ SpringCloud 研究与学习，内包含Zuul,Eureka,Config,Feign,Ribbon等框架�
  - order-service 订单服务
  - api-getway 网关服务工程，使用Zuul对服务进行分发和权限校验，端口：7000
 
+# 项目结构 #
+服务内部调用是互相信任的，可以直接调用。外部访问要通过网关服务进行转发处理。
+![](wiki/img/springcloud-strut.png)
+
+
 ## 使用说明 ##
  
 
