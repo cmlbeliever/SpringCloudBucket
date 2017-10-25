@@ -5,12 +5,12 @@ SpringCloud 研究与学习，内包含Zuul,Eureka,Config,Feign,Ribbon等框架�
 
 ## 项目内各工程说明 ##
 
- - config-server 配置中心，作为configserver
- - eureka-server eureka服务工程
+ - config-server 配置中心，作为configserver，端口：9000
+ - eureka-server eureka服务工程，端口：8761
  - user-service 用户服务工程
  - auth-service 授权认证服务，用于用户权限校验
  - order-service 订单服务
- - api-getway 网关服务工程，使用Zuul对服务进行分发和权限校验
+ - api-getway 网关服务工程，使用Zuul对服务进行分发和权限校验，端口：7000
 
 ## 使用说明 ##
  
@@ -24,7 +24,22 @@ SpringCloud 研究与学习，内包含Zuul,Eureka,Config,Feign,Ribbon等框架�
 
 步骤1,2需要严格按照顺序启动，步骤1启动成功后才可以继续启动步骤2。步骤2启动成功后，3-6的服务可以同时启动
 
-步骤2启动成功后，访问http://localhost:8761/即可查看到启动的服务,全都启动成功后即可以进行后续的测试。
+步骤2启动成功后，访问http://localhost:8761/ 即可查看到启动的服务,全都启动成功后即可以进行后续的测试。
+
+## Api网关说明 ##
+
+ - 页面启动后访问：http://localhost:8761/ 即可查看eureka服务有多少个已经注册成功
+![](../wiki/img/eureka-server.png)
+
+ - 网关直接调用用户和订单服务，访问地址：http://192.168.1.183:7000/biz/zuul
+![](../wiki/img/zuul1.png)
+ - 用户登录，转发到用户登录接口，返回状态码和token信息，由于token信息是在用户服务中使用的。所以对外使用时在网关层使用JWT加密，防止信息篡改和权限校验。直接调用登录接口：
+![](../wiki/img/login.png)
+通过网关调用登录接口，返回的token是通过JWT加密的
+![](../wiki/img/login2.png)
+
+
+
 
 ## 概论 ##
 通常来说，微服务之间的通信是通过内网来的，与外部连接是通过网关来转发的。
