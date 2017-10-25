@@ -15,12 +15,12 @@ SpringCloud 研究与学习，内包含Zuul,Eureka,Config,Feign,Ribbon等框架�
 ## 使用说明 ##
  
 
- 1. 启动配置中心：config-server
- 2. 启动服务中心：eureka-server
- 3. 启动用户服务：user-service
- 4. 启动订单服务：order-service
- 5. 启动授权服务：auth-service
- 6. 启动网关服务：api-getway
+ 1. 启动配置中心：进入config-server目录执行命令：mvn spring-boot:run
+ 2. 启动服务中心：eureka-server目录执行命令：mvn spring-boot:run
+ 3. 启动用户服务：user-service目录执行命令：mvn spring-boot:run
+ 4. 启动订单服务：order-service目录执行命令：mvn spring-boot:run
+ 5. 启动授权服务：auth-service目录执行命令：mvn spring-boot:run
+ 6. 启动网关服务：api-getway目录执行命令：mvn spring-boot:run
 
 步骤1,2需要严格按照顺序启动，步骤1启动成功后才可以继续启动步骤2。步骤2启动成功后，3-6的服务可以同时启动
 
