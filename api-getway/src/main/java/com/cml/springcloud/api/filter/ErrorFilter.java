@@ -33,6 +33,8 @@ public class ErrorFilter extends AbstractZuulFilter {
 			RequestContext context = getCurrentContext();
 			context.getResponse().setCharacterEncoding("UTF-8");
 
+			logger.error("error", context.getThrowable());
+
 			if (null != errorHandler) {
 				context.setResponseStatusCode(errorHandler.getResponseCode());
 				String body = errorHandler.getResponseBody(null, context.getThrowable());
