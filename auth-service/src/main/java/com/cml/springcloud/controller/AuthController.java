@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.cml.springcloud.auth.AccessTokenAuthManager;
-import com.cml.springcloud.model.AuthModel;
+import com.cml.springcloud.model.result.AuthResult;
 
 @Controller
 @RequestMapping("/auth")
@@ -39,8 +39,8 @@ public class AuthController {
 	 */
 	@RequestMapping("/decodeToken")
 	@ResponseBody
-	public AuthModel decodeToken(String token) {
-		AuthModel authModel = new AuthModel();
+	public AuthResult decodeToken(String token) {
+		AuthResult authModel = new AuthResult();
 		authModel.setStatus(HttpServletResponse.SC_OK);
 		try {
 			authModel.setToken(authTokenManager.parseToken(token));
@@ -61,8 +61,8 @@ public class AuthController {
 	 */
 	@RequestMapping("/encodeToken")
 	@ResponseBody()
-	public AuthModel encodeToken(String token) throws Exception {
-		AuthModel authModel = new AuthModel();
+	public AuthResult encodeToken(String token) throws Exception {
+		AuthResult authModel = new AuthResult();
 		authModel.setStatus(HttpServletResponse.SC_OK);
 		authModel.setToken(authTokenManager.generateToken(token));
 		return authModel;

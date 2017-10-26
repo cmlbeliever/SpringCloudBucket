@@ -1,6 +1,6 @@
-package com.cml.springcloud.model;
+package com.cml.springcloud.model.result;
 
-public class UserResultVO extends BaseResult {
+public class UserResult extends BaseResult {
 	private String username;
 	private String nickname;
 

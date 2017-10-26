@@ -1,6 +1,6 @@
-package com.cml.springcloud.model;
+package com.cml.springcloud.model.result;
 
-public class ZuulModel {
+public class ZuulResult extends BaseResult {
 	private String userInfo;
 	private String orderInfo;
 	private String systemMsg;

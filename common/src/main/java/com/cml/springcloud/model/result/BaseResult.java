@@ -1,4 +1,6 @@
-package com.cml.springcloud.model;
+package com.cml.springcloud.model.result;
+
+import com.cml.springcloud.constant.ApiServiceContanst;
 
 public class BaseResult {
 	private int status;
@@ -20,4 +22,7 @@ public class BaseResult {
 		this.errMsg = errMsg;
 	}
 
+	public boolean isSuccess() {
+		return status == ApiServiceContanst.ResultCode.RESULT_OK;
+	}
 }

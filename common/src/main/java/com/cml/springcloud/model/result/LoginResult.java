@@ -1,6 +1,6 @@
-package com.cml.springcloud.model;
+package com.cml.springcloud.model.result;
 
-public class LoginResultVO extends BaseResult {
+public class LoginResult extends BaseResult {
 	private String token;
 
 	public String getToken() {

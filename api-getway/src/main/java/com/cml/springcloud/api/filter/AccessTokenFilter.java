@@ -18,7 +18,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.util.StreamUtils;
 
 import com.cml.springcloud.api.AuthApi;
-import com.cml.springcloud.model.AuthModel;
+import com.cml.springcloud.model.result.AuthResult;
 import com.netflix.zuul.context.RequestContext;
 import com.netflix.zuul.http.ServletInputStreamWrapper;
 
@@ -62,9 +62,9 @@ public class AccessTokenFilter extends AbstractZuulFilter {
 
 			// token 为空不处理
 			if (StringUtils.isNotBlank(token)) {
-				AuthModel authResult = authApi.parseToken(token);
+				AuthResult authResult = authApi.parseToken(token);
 				// 校验成功
-				if (authResult.getStatus() == HttpServletResponse.SC_OK) {
+				if (authResult.isSuccess()) {
 					String body = StreamUtils.copyToString(in, Charset.forName("UTF-8"));
 					logger.info("body:" + body);
 					body = StringUtils.replace(body, PARAM_TOKEN + "=" + token, PARAM_TOKEN + "=" + authResult.getToken());

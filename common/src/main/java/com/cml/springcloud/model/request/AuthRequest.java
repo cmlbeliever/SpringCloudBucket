@@ -1,6 +1,6 @@
-package com.cml.springcloud.model;
+package com.cml.springcloud.model.request;
 
-public class AuthModel {
+public class AuthRequest {
 	private int status;
 	private String token;
 	private String errMsg;

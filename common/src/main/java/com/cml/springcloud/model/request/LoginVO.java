@@ -1,4 +1,4 @@
-package com.cml.springcloud.model;
+package com.cml.springcloud.model.request;
 
 public class LoginVO {
 	private String username;

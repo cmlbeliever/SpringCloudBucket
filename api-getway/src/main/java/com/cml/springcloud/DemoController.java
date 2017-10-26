@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.cml.springcloud.api.OrderApi;
 import com.cml.springcloud.api.UserApi;
-import com.cml.springcloud.model.ZuulModel;
+import com.cml.springcloud.model.result.ZuulResult;
 
 @Controller
 @RequestMapping("/biz")
@@ -44,8 +44,8 @@ public class DemoController {
 
 	@RequestMapping("/zuul")
 	@ResponseBody()
-	public ZuulModel testFeign(@RequestParam(defaultValue = "defaultUser", required = false) String user) throws Exception {
-		ZuulModel model = new ZuulModel();
+	public ZuulResult testFeign(@RequestParam(defaultValue = "defaultUser", required = false) String user) throws Exception {
+		ZuulResult model = new ZuulResult();
 		model.setUserInfo(userApi.getUser(user));
 		model.setOrderInfo(orderApi.getOrder(user));
 		model.setSystemMsg("port:" + port + ",serverName:" + sererName);

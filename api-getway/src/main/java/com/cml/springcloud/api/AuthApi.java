@@ -4,14 +4,14 @@ import org.springframework.cloud.netflix.feign.FeignClient;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.cml.springcloud.model.AuthModel;
+import com.cml.springcloud.model.result.AuthResult;
 
 @FeignClient("AUTH-SERVICE")
 public interface AuthApi {
 
 	@RequestMapping(value = "/auth/encodeToken")
-	AuthModel encodeToken(@RequestParam("token") String token);
+	AuthResult encodeToken(@RequestParam("token") String token);
 
 	@RequestMapping(value = "/auth/decodeToken")
-	AuthModel parseToken(@RequestParam("token") String token);
+	AuthResult parseToken(@RequestParam("token") String token);
 }

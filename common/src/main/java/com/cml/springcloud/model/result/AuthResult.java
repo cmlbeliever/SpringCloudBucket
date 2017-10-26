@@ -1,17 +1,8 @@
-package com.cml.springcloud.model;
+package com.cml.springcloud.model.result;
 
-public class AuthModel {
-	private int status;
+public class AuthResult extends BaseResult {
 	private String token;
 	private String errMsg;
-
-	public int getStatus() {
-		return status;
-	}
-
-	public void setStatus(int status) {
-		this.status = status;
-	}
 
 	public String getToken() {
 		return token;
