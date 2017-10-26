@@ -28,6 +28,12 @@
 			<groupId>com.google.code.gson</groupId>
 			<artifactId>gson</artifactId>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/com.netflix.eureka/eureka-core -->
+		<dependency>
+			<groupId>com.netflix.eureka</groupId>
+			<artifactId>eureka-core</artifactId>
+			<scope>runtime</scope>
+		</dependency>
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
