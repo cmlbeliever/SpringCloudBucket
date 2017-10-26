@@ -21,8 +21,10 @@ import com.google.gson.Gson;
 public class CustomZuulFilterConfiguration {
 
 	@Bean
-	public AccessTokenFilter accessTokenFilter() {
-		return new AccessTokenFilter();
+	public AccessTokenFilter accessTokenFilter(AccessTokenResponseHandler handler) {
+		AccessTokenFilter accessTokenFilter = new AccessTokenFilter();
+		accessTokenFilter.setResponseHandler(handler);
+		return accessTokenFilter;
 	}
 
 	@Bean
@@ -40,6 +42,27 @@ public class CustomZuulFilterConfiguration {
 	@Bean
 	public AuthResponseFilter responseFilter() {
 		return new AuthResponseFilter();
+	}
+
+	@Component
+	public class AccessTokenResponseHandler implements ResponseHandler {
+
+		@Value("${system.config.error.invalidToken}")
+		private String invalidTokenMessage;
+
+		@Override
+		public int getResponseCode() {
+			return HttpServletResponse.SC_OK;
+		}
+
+		@Override
+		public String getResponseBody(String originMessage, Throwable e) {
+			Gson gson = new Gson();
+			Map<String, Object> result = new HashMap<String, Object>();
+			result.put("status", HttpServletResponse.SC_BAD_REQUEST);
+			result.put("message", invalidTokenMessage);
+			return gson.toJson(result);
+		}
 	}
 
 	/**
@@ -65,7 +88,6 @@ public class CustomZuulFilterConfiguration {
 			Map<String, Object> result = new HashMap<String, Object>();
 			result.put("status", HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
 			result.put("message", errorMessage);
-			System.out.println("====>" + errorMessage);
 			return gson.toJson(result);
 		}
 	}

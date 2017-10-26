@@ -2,6 +2,8 @@ package com.cml.springcloud.controller;
 
 import java.util.UUID;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.cml.springcloud.model.LoginResultVO;
 import com.cml.springcloud.model.LoginVO;
+import com.cml.springcloud.model.UserResultVO;
 
 @Controller
 @RequestMapping("/")
@@ -32,11 +35,29 @@ public class UserController {
 		if (StringUtils.isNotBlank(user.getUsername()) && StringUtils.equals(user.getUsername(), user.getPassword())) {
 			String token = UUID.randomUUID().toString();
 			result.setToken(token);
-			result.setStatus(200);
+			result.setStatus(HttpServletResponse.SC_OK);
 		} else {
 			result.setErrMsg("用户名或密码错误");
-			result.setStatus(10001);
+			result.setStatus(HttpServletResponse.SC_BAD_REQUEST);
 		}
 		return result;
 	}
+
+	@ResponseBody
+	@PostMapping("/getUserInfoByToken")
+	public UserResultVO getUserInfoByToken(String token) {
+		logger.info("获取用户信息：token:" + token);
+		UserResultVO result = new UserResultVO();
+		if (StringUtils.isNotBlank(token)) {
+			// 查询数据库获取用户信息
+			result.setUsername("username");
+			result.setNickname("nickname");
+			result.setStatus(HttpServletResponse.SC_OK);
+		} else {
+			result.setErrMsg("invalid token!");
+			result.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+		}
+		return result;
+	}
+
 }
