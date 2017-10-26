@@ -32,7 +32,6 @@
 		<dependency>
 			<groupId>com.netflix.eureka</groupId>
 			<artifactId>eureka-core</artifactId>
-			<scope>runtime</scope>
 		</dependency>
 
 		<dependency>
