@@ -4,7 +4,7 @@
 SpringCloud 研究与学习，内包含Zuul,Eureka,Config,Feign,Ribbon等框架的使用
 
 ## 项目内各工程说明 ##
-
+ - common 各服务共通代码
  - config-server 配置中心，作为configserver，端口：9000
  - eureka-server eureka服务工程，端口：8761
  - user-service 用户服务工程
@@ -19,6 +19,7 @@ SpringCloud 研究与学习，内包含Zuul,Eureka,Config,Feign,Ribbon等框架�
 
 ## 使用说明 ##
  
+启动前先安装common工程，进入common工程执行命令：mvn install
 
  1. 启动配置中心：进入config-server目录执行命令：mvn spring-boot:run
  2. 启动服务中心：eureka-server目录执行命令：mvn spring-boot:run
