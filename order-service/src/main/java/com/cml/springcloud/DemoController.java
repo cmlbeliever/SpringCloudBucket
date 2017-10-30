@@ -3,12 +3,14 @@ package com.cml.springcloud;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.cml.springcloud.api.UserApi;
 
+@RefreshScope
 @Controller
 @RequestMapping("/")
 public class DemoController {
@@ -18,6 +20,9 @@ public class DemoController {
 
 	@Value("${spring.application.name}")
 	private String sererName;
+
+	@Value("${system.order.serverName}")
+	private String serverName;
 
 	@Autowired
 	private DiscoveryClient client;
@@ -32,9 +37,9 @@ public class DemoController {
 	}
 
 	@ResponseBody
-	@RequestMapping("/info")
+	@RequestMapping("/infoTest")
 	public Object info() {
-		return client.getServices();
+		return client.getServices() + ",serverName:" + serverName;
 	}
 
 	@ResponseBody
