@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.cml.springcloud.api.OrderApi;
 import com.cml.springcloud.api.UserApi;
 import com.cml.springcloud.model.result.ZuulResult;
+import com.cml.springcloud.service.RetryableService;
 
 @Controller
 @RequestMapping("/biz")
@@ -29,6 +30,15 @@ public class DemoController {
 	private UserApi userApi;
 	@Autowired
 	private OrderApi orderApi;
+
+	@Autowired
+	private RetryableService retryService;
+
+	@ResponseBody
+	@RequestMapping("/retryTest")
+	public String retryTest(int type) {
+		return retryService.testRetry(type);
+	}
 
 	@ResponseBody
 	@RequestMapping("/info")
