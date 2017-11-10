@@ -3,6 +3,9 @@
 
 SpringCloud 研究与学习，内包含Zuul,Eureka,Config,Feign,Ribbon等框架的使用
 
+# 博客资源 #
+- [http://blog.csdn.net/cml_blog/article/details/78349703](http://blog.csdn.net/cml_blog/article/details/78349703 "SpringCloud Zuul过滤器返回值拦截")
+
 ## 项目内各工程说明 ##
  - common 各服务共通代码
  - config-server 配置中心，作为configserver，端口：9000
