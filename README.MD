@@ -4,7 +4,12 @@
 SpringCloud 研究与学习，内包含Zuul,Eureka,Config,Feign,Ribbon等框架的使用
 
 # 博客资源 #
-- [http://blog.csdn.net/cml_blog/article/details/78349703](http://blog.csdn.net/cml_blog/article/details/78349703 "SpringCloud Zuul过滤器返回值拦截")
+
+
+- [SpringCloud 项目基础搭建与使用](http://blog.csdn.net/cml_blog/article/details/78343323 "SpringCloud 项目基础搭建与使用")
+- [SpringCloud Zuul过滤器返回值拦截](http://blog.csdn.net/cml_blog/article/details/78349703 "SpringCloud Zuul过滤器返回值拦截")
+- [SpringCloud 详解配置刷新的原理](http://blog.csdn.net/cml_blog/article/details/78411312 "SpringCloud 详解配置刷新的原理")
+- [SpringCloud Zuul修改请求参数信息](http://blog.csdn.net/cml_blog/article/details/78361373 " SpringCloud Zuul修改请求参数信息")
 
 ## 项目内各工程说明 ##
  - common 各服务共通代码
