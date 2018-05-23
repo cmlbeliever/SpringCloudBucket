@@ -33,9 +33,9 @@ public class GetRequestAccessTokenFilter extends AbstractZuulFilter {
 
 		logger.info("ori url:" + url + ",serviceId:" + context.get("serviceId"));
 
-		if (true) {
-			rethrowRuntimeException(new RuntimeException("主动跑错"));
-		}
+//		if (true) {
+//			rethrowRuntimeException(new RuntimeException("主动跑错"));
+//		}
 		// URL url =
 		// UriComponentsBuilder.fromUriString(context.getRequest().getRequestURL().toString()).queryParam("user",
 		// "modifydUser").build()

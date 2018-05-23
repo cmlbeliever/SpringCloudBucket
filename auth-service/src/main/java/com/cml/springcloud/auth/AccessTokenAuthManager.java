@@ -66,7 +66,6 @@ public class AccessTokenAuthManager {
 	 * 获取token上记录的信息
 	 * 
 	 * @param token
-	 * @param target
 	 * @return token上记录的信息
 	 */
 	public String parseToken(String token) {
