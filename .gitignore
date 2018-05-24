@@ -1,2 +1,9 @@
 /target/
 /logs/
+.idea
+/**/.idea
+/**/target
+target
+/**/.settings
+*.iml
+/**/*.iml
