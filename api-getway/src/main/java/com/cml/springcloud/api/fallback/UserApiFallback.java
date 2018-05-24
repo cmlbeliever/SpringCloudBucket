@@ -12,6 +12,6 @@ public class UserApiFallback implements UserApi {
 
     @Override
     public String getUser1(String user) {
-        return "fallback=>";
+        return "fallback=>" + user;
     }
 }

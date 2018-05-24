@@ -66,6 +66,7 @@ public class DemoController {
         model.setOrderInfo(orderApi.getOrder(user));
         model.setSystemMsg("port:" + port + ",serverName:" + sererName);
         model.setErrMsg(hystrixTestService.getTestValue("==="));
+        model.setExtra(userApi.getUser1("extra"));
         return model;
     }
     // @RequestMapping("/zuul")
