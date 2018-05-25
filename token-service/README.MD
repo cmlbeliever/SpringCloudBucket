@@ -1,0 +1,2 @@
+#eureka 服务注册中心
+token服务，保障redi队列中的token数量
