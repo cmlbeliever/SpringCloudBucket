@@ -7,7 +7,7 @@ import org.springframework.cloud.netflix.feign.EnableFeignClients;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
 @EnableScheduling
-//@EnableDiscoveryClient
+@EnableDiscoveryClient
 @SpringBootApplication
 public class TokenServiceApplication {
 	public static void main(String[] args) {
