@@ -24,6 +24,11 @@
 
 	<dependencies>
 		<dependency>
+			<groupId>de.codecentric</groupId>
+			<artifactId>spring-boot-admin-starter-client</artifactId>
+			<version>1.5.7</version>
+		</dependency>
+		<dependency>
 			<groupId>com.cml.springcloud</groupId>
 			<artifactId>common</artifactId>
 			<version>1.0</version>
