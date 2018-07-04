@@ -26,15 +26,15 @@
     </parent>
 
     <modules>
+        <module>common</module>
         <module>admin-metrics-service</module>
         <module>api-getway</module>
         <module>auth-service</module>
         <module>config-server</module>
         <module>eureka-server</module>
-        <module>mq-service</module>
+        <!--<module>mq-service</module>-->
         <module>order-service</module>
         <module>token-service</module>
-        <module>common</module>
         <module>user-service</module>
     </modules>
 
@@ -90,13 +90,13 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
-       <!--     <dependency>
-                <groupId>org.springframework.cloud</groupId>
-                <artifactId>spring-cloud-netflix</artifactId>
-                <version>Finchley.RELEASE</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>-->
+            <!--     <dependency>
+                     <groupId>org.springframework.cloud</groupId>
+                     <artifactId>spring-cloud-netflix</artifactId>
+                     <version>Finchley.RELEASE</version>
+                     <type>pom</type>
+                     <scope>import</scope>
+                 </dependency>-->
         </dependencies>
     </dependencyManagement>
 
