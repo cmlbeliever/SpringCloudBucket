@@ -53,6 +53,10 @@ SpringCloud 研究与学习，内包含Zuul,Eureka,Config,Feign,Ribbon等框架�
 ![](wiki/img/login2.png)
 
 
+# 使用docker部署
+先配置好docker环境，从cmd进入执行docker images 命令运行正常，
+到工程中，执行;mvn package docker:build，执行docker images可以看到生成的镜像，
+运行：docker run -p 8081:8081 -t springcloud/${工程名字}
 
 
 ## 概论 ##

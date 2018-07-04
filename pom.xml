@@ -17,6 +17,7 @@
         <spring-cloud.netfilx>2.0.0.RELEASE</spring-cloud.netfilx>
         <spring-cloud.openfeign>2.0.0.RELEASE</spring-cloud.openfeign>
         <admin.version>2.0.0</admin.version>
+        <docker.image.prefix>springcloud</docker.image.prefix>
     </properties>
 
     <parent>
@@ -145,6 +146,22 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>com.spotify</groupId>
+                <artifactId>docker-maven-plugin</artifactId>
+                <version>0.4.13</version>
+                <configuration>
+                    <imageName>${docker.image.prefix}/${project.artifactId}</imageName>
+                    <dockerDirectory>src/main/docker</dockerDirectory>
+                    <resources>
+                        <resource>
+                            <targetPath>/</targetPath>
+                            <directory>${project.build.directory}</directory>
+                            <include>${project.build.finalName}.jar</include>
+                        </resource>
+                    </resources>
+                </configuration>
             </plugin>
         </plugins>
     </build>
