@@ -15,11 +15,6 @@
     </parent>
 
     <dependencies>
-        <dependency>
-            <groupId>com.cml.springcloud</groupId>
-            <artifactId>common</artifactId>
-            <version>1.0</version>
-        </dependency>
 
         <!--增加eureka-server的依赖 -->
         <!-- https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-starter-eureka-server -->

@@ -15,12 +15,6 @@
     </parent>
 
     <dependencies>
-        <dependency>
-            <groupId>com.cml.springcloud</groupId>
-            <artifactId>common</artifactId>
-            <version>1.0</version>
-        </dependency>
-
         <!-- https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-commons -->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
