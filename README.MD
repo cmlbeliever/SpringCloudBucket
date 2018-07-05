@@ -63,4 +63,7 @@ SpringCloud 研究与学习，内包含Zuul,Eureka,Config,Feign,Ribbon等框架�
 通常来说，微服务之间的通信是通过内网来的，与外部连接是通过网关来转发的。
 所以基本上对外开放的工程都集成在api-getway工程上。通过网关服务，对其他服务调用前可以进行基本的权限校验和数据拦截
  
-
+## TODO
+ - 整合阿波罗配置中心
+ - 添加hystrix dashboard
+ - 添加网关流量监控，ip限定，QPS输出
