@@ -12,34 +12,34 @@ import com.cml.springcloud.api.OrderApi;
 @Controller
 @RequestMapping("/")
 public class DemoController {
+    @Value("${server.port}")
+    private String port;
 
-	@Value("${spring.application.name}")
-	private String port;
-	@Value("${server.port}")
-	private String sererName;
+    @Value("${spring.application.name}")
+    private String sererName;
 
-	@Autowired
-	private DiscoveryClient client;
+    @Autowired
+    private DiscoveryClient client;
 
-	@Autowired
-	private OrderApi orderApi;
+    @Autowired
+    private OrderApi orderApi;
 
-	@ResponseBody
-	@RequestMapping("/info")
-	public Object info() {
-		return client.getServices();
-	}
+    @ResponseBody
+    @RequestMapping("/info")
+    public Object info() {
+        return client.getServices();
+    }
 
-	@ResponseBody
-	@RequestMapping("/getUser")
-	public String getUser(String user) {
-		return "get userInfo user:[" + user + "],from : port:" + port + ",serverName:" + sererName;
-	}
+    @ResponseBody
+    @RequestMapping("/getUser")
+    public String getUser(String user) {
+        return "get userInfo user:[" + user + "],from : port:" + port + ",serverName:" + sererName;
+    }
 
-	@RequestMapping("/test")
-	@ResponseBody
-	public String test(String user) {
-		return "Get userInfo[ " + user + "]  from port:" + port + ",serverName:" + sererName + "\n has order:"
-				+ orderApi.getOrder("u" + user);
-	}
+    @RequestMapping("/test")
+    @ResponseBody
+    public String test(String user) {
+        return "Get userInfo[ " + user + "]  from port:" + port + ",serverName:" + sererName + "\n has order:"
+                + orderApi.getOrder("u" + user);
+    }
 }
