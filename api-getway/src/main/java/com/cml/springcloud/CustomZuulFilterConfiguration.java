@@ -52,7 +52,7 @@ public class CustomZuulFilterConfiguration {
 
 		@Override
 		public int getResponseCode() {
-			return HttpServletResponse.SC_OK;
+			return HttpServletResponse.SC_INTERNAL_SERVER_ERROR;
 		}
 
 		@Override
@@ -79,7 +79,7 @@ public class CustomZuulFilterConfiguration {
 
 		@Override
 		public int getResponseCode() {
-			return HttpServletResponse.SC_OK;
+			return HttpServletResponse.SC_INTERNAL_SERVER_ERROR;
 		}
 
 		@Override

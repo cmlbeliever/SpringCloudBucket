@@ -4,9 +4,11 @@ import java.util.UUID;
 
 import com.netflix.discovery.DiscoveryClient;
 import com.netflix.discovery.DiscoveryManager;
+import com.netflix.discovery.EurekaClient;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,9 +25,14 @@ import com.cml.springcloud.model.result.UserResult;
 public class UserController {
     protected static Logger logger = LoggerFactory.getLogger(UserController.class);
 
-    @GetMapping("/shutdown")
-    public void shutDown() {
-        DiscoveryManager.getInstance().shutdownComponent();
+    @Autowired
+    private EurekaClient eurekaClient;
+
+    @ResponseBody
+    @GetMapping("/eurekaUnRegister")
+    public String shutDown() {
+        eurekaClient.shutdown();
+        return "eurekaUnRegistering";
     }
 
     /**
