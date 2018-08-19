@@ -1,5 +1,7 @@
 package com.cml.springcloud.controller;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
@@ -12,6 +14,8 @@ import com.cml.springcloud.api.OrderApi;
 @Controller
 @RequestMapping("/")
 public class DemoController {
+    private Logger logger = LoggerFactory.getLogger(getClass());
+
     @Value("${server.port}")
     private String port;
 
@@ -41,5 +45,16 @@ public class DemoController {
     public String test(String user) {
         return "Get userInfo[ " + user + "]  from port:" + port + ",serverName:" + sererName + "\n has order:"
                 + orderApi.getOrder("u" + user);
+    }
+
+    @RequestMapping("/retryListener")
+    @ResponseBody
+    public String testRetryListener() {
+        try {
+            return orderApi.testRetry();
+        } catch (Exception e) {
+            logger.error("", e);
+            return "error:" + e.getMessage();
+        }
     }
 }

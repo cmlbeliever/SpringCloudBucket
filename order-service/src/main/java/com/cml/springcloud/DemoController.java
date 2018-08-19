@@ -17,6 +17,7 @@ import com.cml.springcloud.api.UserApi;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.concurrent.atomic.AtomicLong;
 
 @RefreshScope
 @Controller
@@ -48,6 +49,23 @@ public class DemoController {
     @RequestMapping("/test")
     public String test(String user) {
         return "port:" + port + ",serverName:" + sererName + ",getUser info ==>" + userApi.getUser(user);
+    }
+
+    private AtomicLong counter = new AtomicLong(1);
+
+    /**
+     * 每次請求計數器加一，当请求的次数不为3的倍数时，休眠2.1s返回
+     *
+     * @return
+     * @throws InterruptedException
+     */
+    @ResponseBody
+    @RequestMapping("/testRetry")
+    public String testRetry() throws InterruptedException {
+        if (counter.incrementAndGet() % 3 != 0) {
+            Thread.sleep(2100);
+        }
+        return "port:" + port;
     }
 
     @ResponseBody
