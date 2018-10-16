@@ -10,17 +10,19 @@ import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.messaging.MessageChannel;
 import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.cml.springcloud.api.OrderApi;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-@Controller
+@RestController
 @RequestMapping("/")
 public class DemoController {
     private Logger logger = LoggerFactory.getLogger(getClass());
@@ -44,13 +46,7 @@ public class DemoController {
 
     @RequestMapping("/elk")
     @ResponseBody
-    public String sendELK() {
-        //October 13th 2018, 17:17:28.664
-        //
-//        datas.put("@timestamp", "October 13th 2018, " + new SimpleDateFormat("hh:mm:ss.SSS").format(new Date(System.currentTimeMillis())));
-//        datas.put("@timestamp", "October 13th 2018, 20:14:28.664");
-//            datas.put("@timestamp", new SimpleDateFormat("yyyy"));
-
+    public Map sendELK(@RequestBody Map param) {
         Map extra = new HashMap();
         extra.put("request", "request" + System.currentTimeMillis());
         extra.put("response", "response" + System.currentTimeMillis());
@@ -59,10 +55,14 @@ public class DemoController {
         ext.put("arg1", "arg1");
         ext.put("arg2", "arg2");
         extra.put("ext", ext);
+
+        String order = orderApi.getOrder("testUser");
+        ext.put("order", order);
+
         boolean sendResult = messageChannel.send(MessageBuilder.withPayload(new Gson().toJson(extra)).build());
         logger.info("===============>sendResult:" + sendResult);
         logger.info("===============>message:" + MessageBuilder.withPayload(new Gson().toJson(extra)).build().getPayload());
-        return "OK";
+        return param;
     }
 
     @ResponseBody

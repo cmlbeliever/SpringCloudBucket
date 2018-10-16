@@ -89,9 +89,6 @@ public class DemoController {
     @RequestMapping("/order")
     @ResponseBody
     public String getOrder(String user) throws InterruptedException {
-        System.out.println("=====================>进入order===>");
-        Thread.sleep(10_000);
-        System.out.println("=====================>结束order====>");
         return "Get user[ " + user + "] order from port:" + port + ",serverName:" + sererName;
     }
 
