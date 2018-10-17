@@ -1,5 +1,6 @@
 package com.cml.springcloud.filter;
 
+import com.cml.springcloud.log.LogPointer;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,6 +23,9 @@ public abstract class BaseWebFilter implements Filter {
         DefaultRequestWrapper defaultRequestWrapper = new DefaultRequestWrapper((HttpServletRequest) request);
         DefaultResponseWrapper defaultResponseWrapper = new DefaultResponseWrapper((HttpServletResponse) response);
 
+        long startTime = System.currentTimeMillis();
+        LogPointer.init();
+
         RequestLog requestLog = new RequestLog();
         try {
             chain.doFilter(defaultRequestWrapper, defaultResponseWrapper);
@@ -33,12 +37,17 @@ public abstract class BaseWebFilter implements Filter {
         } finally {
             requestLog.setRequestBody(defaultRequestWrapper.getRequestBody());
             requestLog.setRequestBodyLength(defaultRequestWrapper.getContentLength());
+            requestLog.setUrl(defaultRequestWrapper.getRequestURL().toString());
+            requestLog.setName(defaultRequestWrapper.getRequestURI());
+            requestLog.setInterval(System.currentTimeMillis() - startTime);
 
             String responseBody = defaultResponseWrapper.getResponseBody();
             requestLog.setResponse(responseBody);
             requestLog.setRequestBodyLength(StringUtils.length(responseBody));
 
             onRequestFinished(requestLog);
+
+            LogPointer.clear();
         }
 
     }

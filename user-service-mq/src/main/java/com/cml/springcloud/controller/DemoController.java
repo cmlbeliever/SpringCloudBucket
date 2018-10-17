@@ -1,5 +1,6 @@
 package com.cml.springcloud.controller;
 
+import com.cml.springcloud.log.LogPointer;
 import com.google.gson.Gson;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -59,10 +60,12 @@ public class DemoController {
         String order = orderApi.getOrder("testUser");
         ext.put("order", order);
 
+        LogPointer.addPoint("order", order);
+
         boolean sendResult = messageChannel.send(MessageBuilder.withPayload(new Gson().toJson(extra)).build());
         logger.info("===============>sendResult:" + sendResult);
         logger.info("===============>message:" + MessageBuilder.withPayload(new Gson().toJson(extra)).build().getPayload());
-        return param;
+        return extra;
     }
 
     @ResponseBody

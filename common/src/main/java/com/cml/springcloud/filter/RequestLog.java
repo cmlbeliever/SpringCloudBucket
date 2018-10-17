@@ -7,6 +7,33 @@ public class RequestLog {
     private String responseLength;
     private boolean successful;
     private String errorMessage;
+    private String url;
+    private Long interval;
+    private String name;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Long getInterval() {
+        return interval;
+    }
+
+    public void setInterval(Long interval) {
+        this.interval = interval;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
 
     public String getRequestBody() {
         return requestBody;
