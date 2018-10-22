@@ -6,10 +6,37 @@ public class RequestLog {
     private String response;
     private String responseLength;
     private boolean successful;
-    private String errorMessage;
     private String url;
     private Long interval;
     private String name;
+    private Throwable error;
+    private transient String errorMsg;
+    private String remoteIp;
+
+
+    public String getError() {
+        if (null != error && null == errorMsg) {
+            StringBuffer sb = new StringBuffer();
+            StackTraceElement[] stackTraces = error.getStackTrace();
+            for (StackTraceElement stackTraceElement : stackTraces) {
+                sb.append(stackTraceElement).append("\r\n");
+            }
+            errorMsg = sb.toString();
+        }
+        return errorMsg;
+    }
+
+    public String getRemoteIp() {
+        return remoteIp;
+    }
+
+    public void setRemoteIp(String remoteIp) {
+        this.remoteIp = remoteIp;
+    }
+
+    public void setError(Throwable error) {
+        this.error = error;
+    }
 
     public String getName() {
         return name;
@@ -75,11 +102,4 @@ public class RequestLog {
         this.successful = successful;
     }
 
-    public String getErrorMessage() {
-        return errorMessage;
-    }
-
-    public void setErrorMessage(String errorMessage) {
-        this.errorMessage = errorMessage;
-    }
 }

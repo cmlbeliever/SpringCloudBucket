@@ -6,7 +6,34 @@ public class KafkaLog<T> {
     private T data;
     private String index;
     private String type;
-    private Map<String,Object> extra;
+    private String serviceName;
+    private String env;
+    private Map<String, Object> extra;
+    private String ip;
+
+    public String getIp() {
+        return ip;
+    }
+
+    public void setIp(String ip) {
+        this.ip = ip;
+    }
+
+    public String getServiceName() {
+        return serviceName;
+    }
+
+    public void setServiceName(String serviceName) {
+        this.serviceName = serviceName;
+    }
+
+    public String getEnv() {
+        return env;
+    }
+
+    public void setEnv(String env) {
+        this.env = env;
+    }
 
     public Map<String, Object> getExtra() {
         return extra;

@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public abstract class BaseWebFilter implements Filter {
-    private Logger logger = LoggerFactory.getLogger(getClass());
+    protected Logger logger = LoggerFactory.getLogger(getClass());
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
@@ -27,13 +27,13 @@ public abstract class BaseWebFilter implements Filter {
         LogPointer.init();
 
         RequestLog requestLog = new RequestLog();
+        requestLog.setRemoteIp(request.getRemoteAddr());
         try {
             chain.doFilter(defaultRequestWrapper, defaultResponseWrapper);
             requestLog.setSuccessful(true);
         } catch (Exception e) {
-            logger.error("", e);
             requestLog.setSuccessful(false);
-            requestLog.setErrorMessage(e.getMessage());
+            requestLog.setError(e);
         } finally {
             requestLog.setRequestBody(defaultRequestWrapper.getRequestBody());
             requestLog.setRequestBodyLength(defaultRequestWrapper.getContentLength());
