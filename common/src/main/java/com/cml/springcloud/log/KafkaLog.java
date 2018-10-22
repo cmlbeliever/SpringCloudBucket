@@ -10,6 +10,15 @@ public class KafkaLog<T> {
     private String env;
     private Map<String, Object> extra;
     private String ip;
+    private String traceId;
+
+    public String getTraceId() {
+        return traceId;
+    }
+
+    public void setTraceId(String traceId) {
+        this.traceId = traceId;
+    }
 
     public String getIp() {
         return ip;

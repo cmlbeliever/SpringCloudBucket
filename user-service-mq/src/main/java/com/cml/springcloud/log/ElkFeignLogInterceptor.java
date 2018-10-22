@@ -1,7 +1,6 @@
 package com.cml.springcloud.log;
 
 import com.cml.springcloud.feign.FeignLogInterceptor;
-import com.cml.springcloud.filter.RequestLog;
 import com.google.gson.Gson;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

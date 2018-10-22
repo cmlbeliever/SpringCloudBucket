@@ -1,4 +1,4 @@
-package com.cml.springcloud.filter;
+package com.cml.springcloud.log;
 
 public class RequestLog {
     private String requestBody;

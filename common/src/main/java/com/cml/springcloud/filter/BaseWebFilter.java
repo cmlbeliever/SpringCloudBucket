@@ -1,6 +1,7 @@
 package com.cml.springcloud.filter;
 
 import com.cml.springcloud.log.LogPointer;
+import com.cml.springcloud.log.RequestLog;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,7 +28,7 @@ public abstract class BaseWebFilter implements Filter {
         LogPointer.init();
 
         RequestLog requestLog = new RequestLog();
-        requestLog.setRemoteIp(request.getRemoteAddr());
+        requestLog.setRemoteIp(getIpAddress((HttpServletRequest) request));
         try {
             chain.doFilter(defaultRequestWrapper, defaultResponseWrapper);
             requestLog.setSuccessful(true);
@@ -54,6 +55,23 @@ public abstract class BaseWebFilter implements Filter {
 
     protected abstract void onRequestFinished(RequestLog requestLog);
 
+    public static String getIpAddress(HttpServletRequest request) {
+        String ip = request.getHeader("x-forwarded-for");
+        if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+            ip = request.getHeader("Proxy-Client-IP");
+        }
+        if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+            ip = request.getHeader("WL-Proxy-Client-IP");
+        }
+        if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+            ip = request.getRemoteAddr();
+        }
+        if (ip.contains(",")) {
+            return ip.split(",")[0];
+        } else {
+            return ip;
+        }
+    }
 
     @Override
     public void destroy() {

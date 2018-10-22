@@ -2,6 +2,7 @@ package com.cml.springcloud.filter;
 
 import com.cml.springcloud.log.KafkaLog;
 import com.cml.springcloud.log.LogPointer;
+import com.cml.springcloud.log.RequestLog;
 import com.cml.springcloud.util.ApplicationUtil;
 import com.google.gson.Gson;
 import org.slf4j.Logger;
@@ -34,6 +35,7 @@ public class ElkFilter extends BaseWebFilter {
         requestLogKafkaLog.setExtra(LogPointer.getPoints());
         requestLogKafkaLog.setEnv(ApplicationUtil.getEnv());
         requestLogKafkaLog.setServiceName(ApplicationUtil.getApplicationName());
+        requestLogKafkaLog.setTraceId(LogPointer.getTraceId());
         try {
             requestLogKafkaLog.setIp(InetAddress.getLocalHost().getHostAddress());
         } catch (UnknownHostException e) {
