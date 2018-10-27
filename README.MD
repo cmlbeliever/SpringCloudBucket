@@ -19,6 +19,7 @@ SpringCloud 研究与学习，内包含Zuul,Eureka,Config,Feign,Ribbon等框架�
  - auth-service 授权认证服务，用于用户权限校验
  - order-service 订单服务
  - api-getway 网关服务工程，使用Zuul对服务进行分发和权限校验，端口：7000
+ - user-service-mq GitChat课程使用的代码，使用基于kafka的日志埋点收集系统
 
 # 项目结构 #
 服务内部调用是互相信任的，可以直接调用。外部访问要通过网关服务进行转发处理。
