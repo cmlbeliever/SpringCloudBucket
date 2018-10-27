@@ -1,5 +1,7 @@
 package com.cml.springcloud.log;
 
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.util.Map;
 
 public class KafkaLog<T> {
@@ -10,7 +12,21 @@ public class KafkaLog<T> {
     private String env;
     private Map<String, Object> extra;
     private String ip;
+    private String hostName;
     private String traceId;
+
+    public String getHostName() {
+        try {
+            return InetAddress.getLocalHost().getHostName();
+        } catch (UnknownHostException e) {
+            e.printStackTrace();
+        }
+        return hostName;
+    }
+
+    public void setHostName(String hostName) {
+        this.hostName = hostName;
+    }
 
     public String getTraceId() {
         return traceId;

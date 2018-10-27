@@ -1,6 +1,6 @@
 package com.cml.springcloud.log;
 
-import com.cml.springcloud.feign.FeignLogInterceptor;
+import com.cml.springcloud.interceptor.RemoteLogInterceptor;
 import com.google.gson.Gson;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 import java.io.IOException;
 
 @Component
-public class ElkFeignLogInterceptor implements FeignLogInterceptor {
+public class ElkRemoteLogInterceptor implements RemoteLogInterceptor {
     private Logger logger = LoggerFactory.getLogger(getClass());
     @Qualifier("elkTopic")
     @Autowired

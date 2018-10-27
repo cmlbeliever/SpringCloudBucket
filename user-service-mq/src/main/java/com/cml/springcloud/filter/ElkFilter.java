@@ -4,6 +4,7 @@ import com.cml.springcloud.log.KafkaLog;
 import com.cml.springcloud.log.LogPointer;
 import com.cml.springcloud.log.RequestLog;
 import com.cml.springcloud.util.ApplicationUtil;
+import com.google.common.eventbus.AsyncEventBus;
 import com.google.gson.Gson;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,6 +21,8 @@ import java.net.UnknownHostException;
 public class ElkFilter extends BaseWebFilter {
 
     private Logger logger = LoggerFactory.getLogger(getClass());
+
+    private AsyncEventBus asyncEventBus;
 
     @Qualifier("elkTopic")
     @Autowired

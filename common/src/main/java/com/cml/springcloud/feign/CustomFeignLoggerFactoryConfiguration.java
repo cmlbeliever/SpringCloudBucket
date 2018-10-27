@@ -1,5 +1,6 @@
 package com.cml.springcloud.feign;
 
+import com.cml.springcloud.interceptor.RemoteLogInterceptor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
@@ -24,15 +25,15 @@ public class CustomFeignLoggerFactoryConfiguration {
 
     @Bean
     @ConditionalOnMissingBean
-    public FeignLogInterceptor feignLogInterceptor() {
+    public RemoteLogInterceptor feignLogInterceptor() {
         return (String name, String url, String requestBody, Integer status, String body, long interval) -> {
             logger.debug(String.format("name:%s,url:%s,requestBody:%s,Response:%s,Interval:%s", name, url, requestBody, body, interval));
         };
     }
 
     @Bean
-    public DefaultFeignLogger defaultFeignLogger(FeignLogInterceptor feignLogInterceptor) {
-        return new DefaultFeignLogger(feignLogInterceptor);
+    public DefaultFeignLogger defaultFeignLogger(RemoteLogInterceptor remoteLogInterceptor) {
+        return new DefaultFeignLogger(remoteLogInterceptor);
     }
 
     @Bean

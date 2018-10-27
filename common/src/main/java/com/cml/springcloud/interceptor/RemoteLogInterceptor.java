@@ -1,4 +1,4 @@
-package com.cml.springcloud.feign;
+package com.cml.springcloud.interceptor;
 
 import java.io.IOException;
 
@@ -7,6 +7,6 @@ import java.io.IOException;
  * @Date: 2018-09-29 11:09
  * @Description:
  */
-public interface FeignLogInterceptor {
+public interface RemoteLogInterceptor {
     void onResponse(String apiName, String url, String requestBody, Integer status, String responseBody, long interval) throws IOException;
 }

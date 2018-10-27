@@ -1,5 +1,6 @@
 package com.cml.springcloud.feign;
 
+import com.cml.springcloud.interceptor.RemoteLogInterceptor;
 import feign.Logger;
 import feign.Request;
 import feign.Response;
@@ -17,9 +18,9 @@ import static feign.Util.decodeOrDefault;
  */
 public class DefaultFeignLogger extends Logger {
 
-    private FeignLogInterceptor logInterceptor;
+    private RemoteLogInterceptor logInterceptor;
 
-    public DefaultFeignLogger(FeignLogInterceptor canaryLogInterceptor) {
+    public DefaultFeignLogger(RemoteLogInterceptor canaryLogInterceptor) {
         this.logInterceptor = canaryLogInterceptor;
     }
 
