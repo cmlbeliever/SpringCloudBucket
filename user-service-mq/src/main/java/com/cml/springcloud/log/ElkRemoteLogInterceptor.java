@@ -32,7 +32,7 @@ public class ElkRemoteLogInterceptor implements RemoteLogInterceptor {
 
         KafkaLog<RequestLog> requestLogKafkaLog = new KafkaLog<>();
         requestLogKafkaLog.setData(requestLog);
-        requestLogKafkaLog.setType("Feignf");
+        requestLogKafkaLog.setType("Feign");
         requestLogKafkaLog.setIndex("web-request");
         requestLogKafkaLog.setExtra(LogPointer.getPoints());
 
