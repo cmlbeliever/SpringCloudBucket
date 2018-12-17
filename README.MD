@@ -35,7 +35,7 @@ SpringCloud 研究与学习，内包含Zuul,Eureka,Config,Feign,Ribbon等框架�
  3. 启动用户服务：user-service目录执行命令：mvn spring-boot:run
  4. 启动订单服务：order-service目录执行命令：mvn spring-boot:run
  5. 启动授权服务：auth-service目录执行命令：mvn spring-boot:run
- 6. 启动网关服务：api-getway目录执行命令：mvn spring-boot:run
+ 6. 启动网关服务：api-gateway目录执行命令：mvn spring-boot:run
 
 步骤1,2需要严格按照顺序启动，步骤1启动成功后才可以继续启动步骤2。步骤2启动成功后，3-6的服务可以同时启动
 

@@ -2,10 +2,10 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.cml.springcloud</groupId>
-    <artifactId>api-getway</artifactId>
+    <artifactId>api-gateway</artifactId>
     <version>1.0</version>
 
-    <name>api-getway</name>
+    <name>api-gateway</name>
     <description>Demo project for Spring Boot</description>
 
     <parent>

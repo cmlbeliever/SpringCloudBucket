@@ -1,0 +1,22 @@
+---
+system:
+  auth:
+    validTime: 3600000
+    jwtKey: d1465f91-8bf1-42c1-9e58-4d3e01fd7d2c
+  config:
+    accessTokenFilter:
+      ignore: /user/login
+    authFilter:
+      authUrl: /user/login
+      tokenKey: token
+    error:
+      message: connect error
+      invalidToken: invalid token
+logging:
+  level:
+    project:
+      user:
+        UserClient: DEBUG
+feign:
+  hystrix:
+    enabled: true

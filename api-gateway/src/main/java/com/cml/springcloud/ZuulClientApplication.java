@@ -12,13 +12,12 @@ import org.springframework.retry.annotation.EnableRetry;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
+@SpringBootApplication
 @EnableRetry
 @EnableZuulProxy
 @EnableFeignClients
 @EnableDiscoveryClient
-@SpringBootApplication
 @EnableHystrix
-//@EnableHystrixDashboard
 @EnableCircuitBreaker
 public class ZuulClientApplication {
 	public static void main(String[] args) {

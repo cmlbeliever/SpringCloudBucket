@@ -1,0 +1,51 @@
+spring:
+  cloud:
+    config:
+      profile: dev
+      label: master
+      uri: http://localhost:9000/
+  application:
+    name: api-gateway
+  boot:
+    admin:
+      client:
+        url: http://localhost:8600
+server:
+  port: 7000
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 5000
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+    health:
+      show-details: ALWAYS
+  security:
+    enabled: false
+  endpoint:
+    threaddump:
+      enabled: false
+    heapdump:
+      enabled: false
+  health:
+    db:
+      enabled: false
+eureka:
+  instance:
+    prefer-ip-address: true
+    lease-expiration-duration-in-seconds: 5
+    leaseRenewalIntervalInSeconds: 5
+    lease-renewal-interval-in-seconds: 5
+  client:
+    registryFetchIntervalSeconds: 5
+zuul:
+  SendErrorFilter:
+    error:
+      disable: true
+  ignoredPatterns: /biz/*
