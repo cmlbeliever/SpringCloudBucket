@@ -37,6 +37,7 @@
         <module>order-service</module>
         <module>token-service</module>
         <module>user-service</module>
+        <module>springcloud-gateway</module>
     </modules>
 
 
