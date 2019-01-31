@@ -1,12 +1,23 @@
 management:
-  endpoint:
-    gateway:
-      enabled: true
+    endpoint:
+        gateway:
+          enabled: true
+        heapdump:
+            enabled: false
+        shutdown:
+            enabled: true
+        threaddump:
+            enabled: false
+    endpoints:
+        health:
+            show-details: ALWAYS
+        web:
+            exposure:
+                include: '*'
+
 server:
   port: 8801
-spring:
-  application:
-    name: springcloud-gateway
+
 eureka:
   client:
     service-url:
@@ -14,3 +25,32 @@ eureka:
   instance:
     ip-address: 127.0.0.1
     non-secure-port: 8801
+spring:
+  application:
+    name: springcloud-gateway
+  cloud:
+    gateway:
+      metrics:
+        enabled: true
+      filter:
+        remove-non-proxy-headers: #去除默认的header https://cloud.spring.io/spring-cloud-gateway/single/spring-cloud-gateway.html#gateway-starter
+          headers:
+            - Connection
+            - Keep-Alive
+            - Proxy-Authenticate
+      routes:
+      - id: cookie_route
+        uri: lb://USER-SERVICE
+        predicates:
+          - Path=/user-gateway/**
+        filters:
+          - StripPrefix=1 #去除user-gateway这一层数据
+          - AddRequestHeader=from-gateway,Yes${server.port}
+          - AddRequestParameter=extraParameter, defaultValue
+          - AddResponseHeader=X-Response-Foo, springcloud-gateway
+          - PreserveHostHeader
+#         - RedirectTo=302, http://acme.org 重定向
+#      - id: host_route
+#        uri: http://example.org
+#        predicates:
+#        - Path=/foo/{segment},/bar/{segment}
