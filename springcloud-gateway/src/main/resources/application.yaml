@@ -9,4 +9,8 @@ spring:
     name: springcloud-gateway
 eureka:
   client:
-    service-url: http://localhost:8761/eureka/
+    service-url:
+      - http://localhost:8761/eureka/
+  instance:
+    ip-address: 127.0.0.1
+    non-secure-port: 8801
