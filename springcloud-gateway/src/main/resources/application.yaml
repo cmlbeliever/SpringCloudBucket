@@ -2,3 +2,11 @@ management:
   endpoint:
     gateway:
       enabled: true
+server:
+  port: 8801
+spring:
+  application:
+    name: springcloud-gateway
+eureka:
+  client:
+    service-url: http://localhost:8761/eureka/
